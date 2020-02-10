@@ -35,24 +35,25 @@ class SPARQLQueryDispatcher {
 }
 
 const endpointUrl = "https://query.wikidata.org/sparql";
-const sparqlQuery = `SELECT DISTINCT ?painting ?paintingLabel (MIN(?images) as ?image) (MIN(?dates) as ?date) (MIN(?locationLabels) as ?locationLabel) (GROUP_CONCAT(DISTINCT ?materialLabel;separator=", ") AS ?materials) (GROUP_CONCAT(DISTINCT ?depictLabel;separator=", ") AS ?depicts)
-WHERE
-{
-  ?painting wdt:P31/wdt:P279* wd:Q3305213 ;
-        wdt:P170 wd:Q762 ;
-        wdt:P18 ?images ;
-        wdt:P571 ?dates ;
-  OPTIONAL { ?painting wdt:P276 ?locations }
-  OPTIONAL { ?painting wdt:P186 ?material }
-  OPTIONAL { ?painting wdt:P180 ?depict }
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" .
-                         ?painting rdfs:label ?paintingLabel .
-                         ?locations rdfs:label ?locationLabels .
-                         ?material rdfs:label ?materialLabel .
-                         ?depict rdfs:label ?depictLabel . }
+const sparqlQuery = `SELECT DISTINCT ?painting (MIN(?images) AS ?image) (MIN(?dates) AS ?date) (MIN(?locationLabels) AS ?locationLabel) (GROUP_CONCAT(DISTINCT ?materialLabel; SEPARATOR = ", ") AS ?materials) (GROUP_CONCAT(DISTINCT ?depictLabel; SEPARATOR = ", ") AS ?depicts) WHERE {
+  ?painting (wdt:P31/(wdt:P279*)) wd:Q3305213;
+    wdt:P18 ?images;
+    wdt:P571 ?dates.
+  OPTIONAL { ?painting wdt:P276 ?locations. }
+  OPTIONAL { ?painting wdt:P186 ?material. }
+  OPTIONAL { ?painting wdt:P180 ?depict. }
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+    ?painting rdfs:label ?paintingLabel.
+    ?locations rdfs:label ?locationLabels.
+    ?material rdfs:label ?materialLabel.
+    ?depict rdfs:label ?depictLabel.
+  }
+  
+  ?painting wdt:P170 wd:Q5432.
 }
 GROUP BY ?painting ?paintingLabel ?image ?date ?locationLabel ?materials ?depicts
-ORDER BY ASC(?date)`;
+ORDER BY (?date)`;
 
 /**
  * Fetch data from Wikidata.

@@ -20,7 +20,7 @@
       </span>
       <span class="footer__links">
         Powered by
-        <a href="//gridsome.org">Gridsome</a>
+        <a href="https://www.artmarq.com">ARTMARQ</a>
       </span>
     </footer>
   </div>

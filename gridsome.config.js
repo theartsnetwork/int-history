@@ -5,8 +5,8 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: "Gridsome Starter Wikidata",
-  siteDescription: "Gridsome Starter for Wikidata",
+  siteName: "Intelligent History",
+  siteDescription: "Intelligent History from Wikidata",
   siteUrl: process.env.SITE_URL,
   pathPrefix: process.env.PATH_PREFIX,
   templates: {
@@ -24,7 +24,7 @@ module.exports = {
     {
       use: "gridsome-plugin-pwa",
       options: {
-        title: "Gridsome Starter Wikidata",
+        title: "Intelligent History",
         startUrl: "/",
         display: "standalone",
         statusBarStyle: "default",
