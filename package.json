@@ -22,7 +22,7 @@
     "vue-lodash": "^2.0.2"
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.0.3",
     "cli-progress": "^3.6.0",
     "eslint": "^6.8.0",
